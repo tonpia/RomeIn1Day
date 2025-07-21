@@ -1,23 +1,14 @@
+version: '3.8'
+
 services:
-  service-core:
-    build: ./service-core
+  api1:
+    build: ./api1
     ports:
       - "8000:8000"
     depends_on:
-      - service-database
-  service-database:
-    build: ./service-database
-    volumes:
-      - ./service-database:/app
+      - api2
+
+  api2:
+    build: ./api2
     ports:
       - "8001:8001"
-    depends_on:
-      - db
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - "5432:5432"
